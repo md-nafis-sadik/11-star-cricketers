@@ -10,11 +10,11 @@ type AttendanceExportRow = {
 };
 
 export async function GET() {
-  const players = (await listPlayers()) as AttendanceExportRow[];
+  const players = await listPlayers();
   const rows: string[][] = [];
 
   for (const player of players) {
-    rows.push([player.id, player.name, player.role, player.availability, "PRESENT", "0"]);
+    rows.push([player.id, player.fullName, player.role, player.availability, "PRESENT", "0"]);
   }
 
   const header: string[] = ["playerId", "name", "role", "availability", "attendanceStatus", "lateByMinutes"];
