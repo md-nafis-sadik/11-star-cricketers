@@ -27,7 +27,7 @@ const playerNav = [
   { href: "/player/announcements", label: "Announcements", icon: Bell },
 ];
 
-type SidebarIcon = (props: { className?: string }) => React.JSX.Element;
+type SidebarIcon = React.ComponentType<{ className?: string }>;
 
 function SidebarLink({ href, label, icon: Icon }: { href: string; label: string; icon: SidebarIcon }) {
   return (
