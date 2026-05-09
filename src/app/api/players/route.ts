@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { listPlayers } from "../../../data/store";
 
 type PlayerSearchRow = {
+  id: string;
   name: string;
   role: string;
 };
@@ -12,7 +13,11 @@ export async function GET(request: Request) {
   const query = url.searchParams.get("q")?.toLowerCase() ?? "";
   const page = Number(url.searchParams.get("page") ?? "1");
   const pageSize = Number(url.searchParams.get("pageSize") ?? "10");
-  const players = (await listPlayers()) as PlayerSearchRow[];
+  const players = (await listPlayers()).map((player) => ({
+    id: player.id,
+    name: player.fullName,
+    role: player.role,
+  }));
   const filtered: PlayerSearchRow[] = [];
 
   for (const player of players) {

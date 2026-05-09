@@ -2,20 +2,8 @@ import { NextResponse } from "next/server";
 
 import { listMatches } from "../../../../data/store";
 
-type ScorecardExportRow = {
-  id: string;
-  title: string;
-  opponent: string;
-  venue: string;
-  startTime: Date;
-  status: string;
-  matchResult: string | null;
-  format: string;
-  liveScore: string | null;
-};
-
 export async function GET() {
-  const matches = (await listMatches()) as ScorecardExportRow[];
+  const matches = await listMatches();
   const rows: string[][] = [];
 
   for (const match of matches) {
