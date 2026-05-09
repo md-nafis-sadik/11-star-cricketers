@@ -4,7 +4,7 @@ const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 const isPlayerRoute = createRouteMatcher(["/player(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
-  const { userId, sessionClaims } = auth();
+  const { userId, sessionClaims } = await auth();
   const role = (sessionClaims as any)?.metadata?.role as string | undefined;
 
   if ((isAdminRoute(request) || isPlayerRoute(request)) && !userId) {
