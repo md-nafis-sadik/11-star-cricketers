@@ -9,7 +9,7 @@ export async function getUserRole(): Promise<UserRole | null> {
 }
 
 export async function requireRole(allowedRoles: UserRole[]) {
-  const session = auth();
+  const session = await auth();
   if (!session.userId) {
     return { ok: false, status: 401 as const };
   }
